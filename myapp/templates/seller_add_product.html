@@ -1,0 +1,108 @@
+{% extends 'seller_header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+
+</head>
+<body>
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Product</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'seller_index' %}">Home</a></li>
+                        <li class="breadcrumb-item active">Add Product</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start login  -->
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row new-account-login">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="title-left">
+                        <h3>Add New Product</h3>
+                    </div>
+                    {% if msg %}
+                        <p style="color:blue">{{msg}}</p>
+                    {% endif %}
+                    <form class="mt-3 review-form-box" id="formRegister" method="POST" action="{% url 'seller_add_product' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">Product Categories</label>
+                                <select name="product_category" class="form-control" required>
+                                    <option>------ Select Product Category -------</option>
+                                    <option value="clothing">Clothing</option>
+                                    <option value="footwear">Footwear</option>
+                                    <option value="beauty">Beauty</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="kitchen">Kitchen Items</option>
+                                    <option value="home">Home Items</option>
+                                    <option value="mobile_laptops">Mobiles and Laptops</option>
+                                    <option value="electronic_items">Electronic Items</option>
+                                    <option value="other">Others</option>
+                                </select>    
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">Product Company</label>
+                                <input type="text" class="form-control" id="InputName" name="product_company" placeholder="Product Company" required> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputLastname" class="mb-0">Product Name</label>
+                                <input type="text" class="form-control" id="InputLastname" name="product_name" placeholder="Product Name" required> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputMobile" class="mb-0">Product Price</label>
+                                <input type="number" class="form-control" id="InputMobile" name="product_price" placeholder="Product Price" required> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">Product Size</label>
+                                <select name="product_size" class="form-control" required>
+                                    <option>------ Select Product Size -------</option>
+                                    <option value="l">L</option>
+                                    <option value="m">M</option>
+                                    <option value="s">S</option>
+                                    <option value="xl">XL</option>
+                                    <option value="xxl">XXL</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="small">Small</option>
+                                    <option value="medium">medium</option>
+                                    <option value="large">Large</option>
+                                    <option value="other">other</option>
+                                </select>    
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputMobile" class="mb-0">Discount (%)</label>
+                                <input type="number" class="form-control" id="InputMobile" name="discount" placeholder="Discount" min="0" max="100" required> </div>                
+                            <div class="form-group col-md-6">
+                                <label for="InputMobile" class="mb-0">Shipping Cost</label>
+                                <input type="number" class="form-control" id="InputMobile" name="shipping_cost" placeholder="Shipping Cost" min="0" required> </div>                
+                            <div class="form-group col-md-6">
+                                <label for="InputEmail1" class="mb-0">Product Image</label>
+                                <input type="file" class="form-control" id="InputEmail1" name="product_image"> </div>
+                        </div>
+                        <center>
+                            <button type="submit" class="btn hvr-hover">Add Product</button>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End login -->
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+
+</head>
+
+<body>
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Wishlist</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">Wishlist</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Wishlist  -->
+    <div class="wishlist-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Images</th>
+                                    <th>Product Name</th>
+                                    <th>Unit Price </th>
+                                    <th>Stock</th>
+                                    <th>Add Item</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            {% if request.session.wishlist_count == 0 %}
+                                <tbody>
+                                    <tr>
+                                        <td colspan="6"><center><p style="color:green; font-size:1.5rem;margin-top: 50px;">No Product In Wishlist</p></center></td>
+                                    </tr>
+                                </tbody>
+                            {% else %}
+                                <tbody>
+                                    {% for a in wishlists %}
+                                    <tr>
+                                        <td class="thumbnail-img">
+                                            <a href="{% url 'shop_detail' pk=a.product.pk %}">
+                                                <img class="img-fluid" src="{{a.product.product_image.url}}" alt="" style="width:100px; height:120px" />
+                                            </a>
+                                        </td>
+                                        <td class="name-pr">
+                                            <a href="{% url 'shop_detail' pk=a.product.pk %}">{{a.product.product_name}}</a>
+                                        </td>
+                                        <td class="price-pr">
+                                            <p>₹ {{a.product.product_price}}</p>
+                                        </td>
+                                        <td class="quantity-box">In Stock</td>
+                                        <td class="add-pr">
+                                            {% if a.product in pc %}
+                                            <a class="btn hvr-hover" href="{% url 'remove_from_cart' pk=a.product.pk %}">Remove From Cart</a>
+                                            {% else %}
+                                            <a class="btn hvr-hover" href="{% url 'add_to_cart' pk=a.product.pk %}">Add to Cart</a>
+                                            {% endif %}
+                                        </td>
+                                        <td class="remove-pr">
+                                            <a href="{% url 'remove_from_wishlist' pk=a.product.pk %}">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            {% endif %}    
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Wishlist -->
+</body>
+</html>
+{% endblock %}

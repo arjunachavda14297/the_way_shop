@@ -1,0 +1,80 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+    
+</head>
+<body>
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>My Order</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">My Order</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Cart  -->
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Images</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>    
+                                <tbody>
+                                    {% for a in carts %}
+                                        <tr>
+                                            <td class="thumbnail-img">
+                                                <a href="{% url 'shop_detail' pk=a.product.pk %}">
+                                                    <img class="img-fluid" src="{{a.product.product_image.url}}" alt="" style="width:100px; height:120px">
+                                                </a>
+                                            </td>
+                                            <td class="name-pr">
+                                                <a href="{% url 'shop_detail' pk=a.product.pk %}">{{a.product.product_name}}</a>
+                                            </td>
+                                            <td class="price-pr">
+                                                <p>₹ {{a.product_price}}</p>
+                                            </td>
+                                            <td class="quantity-box">
+                                                <!-- <input type="number" class="c-input-text qty text" name="product_qty" value="{{a.product_qty}}"> -->
+                                                <label class="c-input-text qty text">{{a.product_qty}}</label>
+                                            </td>
+                                            <td class="total-pr">
+                                                <p>₹ {{a.total_price}}</p>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Cart -->
+
+</body>
+</html>
+{% endblock %}

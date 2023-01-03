@@ -1,0 +1,99 @@
+{% extends 'seller_header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+
+</head>
+<body>
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Product</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'seller_index' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'seller_view_product' %}">View Product</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'seller_product_detail' pk=product.pk %}">Product Detail</a></li>
+                        <li class="breadcrumb-item active">Edit Product</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start login  -->
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row new-account-login">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="title-left">
+                        <h3>Edit Product</h3>
+                    </div>
+                    {% if msg %}
+                        <p style="color:blue">{{msg}}</p>
+                    {% endif %}
+                    <form class="mt-3 review-form-box" id="formRegister" method="POST" action="{% url 'seller_edit_product' pk=product.pk %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">Product Categories</label>
+                                <select name="product_category" class="form-control">
+                                    <option value="{{product.product_category}}">{{product.product_category}}</option>
+                                    <option value="clothing">Clothing</option>
+                                    <option value="footwear">Footwear</option>
+                                    <option value="bags">Bags</option>
+                                    <option value="shoes">Shoes</option>
+                                    <option value="electronic_items">Electronic Items</option>
+                                    <option value="other">Others</option>
+                                </select>    
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">Product Company</label>
+                                <input type="text" class="form-control" id="InputName" name="product_company" value="{{product.product_company}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputLastname" class="mb-0">Product Name</label>
+                                <input type="text" class="form-control" id="InputLastname" name="product_name"  value="{{product.product_name}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputMobile" class="mb-0">Product Price</label>
+                                <input type="text" class="form-control" id="InputMobile" name="product_price"  value="{{product.product_price}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputMobile" class="mb-0">Product size</label>
+                                <input type="text" class="form-control" id="InputMobile" name="product_size"  value="{{product.product_size}}"> </div>                
+                            <div class="form-group col-md-6">
+                                <label for="InputMobile" class="mb-0">Discount (%)</label>
+                                <input type="number" class="form-control" id="InputMobile" name="discount"  value="{{product.discount}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputMobile" class="mb-0">Shipping Cost (₹)</label>
+                                <input type="text" class="form-control" id="InputMobile" name="shipping_cost"  value="{{product.shipping_cost}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputEmail1" class="mb-0">Product Image</label>
+                                <input type="file" class="form-control" id="InputEmail1" name="product_image"> </div>
+                        </div>
+                        <center>
+                            <button type="submit" class="btn hvr-hover">Edit Product</button>
+                        </center>
+                    </form>
+                </div>
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="title-left">
+                        <h3>Product Image</h3>
+                    </div>
+                    <center>
+                    <img src="{{product.product_image.url}}" style="width:250px; height:250px">
+                    </center>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <!-- End login -->
+</body>
+</html>
+{% endblock %}

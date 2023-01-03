@@ -1,0 +1,101 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+
+</head>
+<body>
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Address</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">My Address</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start login  -->
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row new-account-login">
+                {% if request.session.email %}
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="title-left">
+                        <h3>My Address</h3>
+                    </div>
+                    {% if msg1 %}
+                        <p style="color:green">{{msg1}}</p>
+                    {% elif msg2 %}
+                        <p style="color:green">{{msg2}}</p>
+                    {% elif msg3 %}
+                        <p style="color:blue">{{msg3}}</p>
+                    {% elif msg4 %}
+                        <p style="color:blue">{{msg4}}</p>
+                    {% else %}
+                        <p style="color:green">Add your Address here.</p>
+                    {% endif %}
+                    <form class="mt-3 review-form-box" id="formRegister" method="POST" action="{% url 'my_address' %}">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">First Name</label>
+                                <input type="text" class="form-control" id="InputName" name="fname" placeholder="First Name" value="{{ads.fname}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputLastname" class="mb-0">Last Name</label>
+                                <input type="text" class="form-control" id="InputLastname" name="lname" placeholder="Last Name" value="{{ads.lname}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputMobile" class="mb-0">Mobile</label>
+                                <input type="text" class="form-control" id="InputMobile" name="mobile" placeholder="Mobile" value="{{ads.mobile}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0"></label>
+                                <input type="hidden" class="form-control" id="InputName"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputEmail1" class="mb-0">Email Address</label>
+                                <input type="email" class="form-control" id="InputEmail1" name="email" placeholder="Enter Email"  value="{{ads.email}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">State</label>
+                                <input type="text" class="form-control" id="InputName" name="state" placeholder="State Name" value="{{ads.state}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">District</label>
+                                <input type="text" class="form-control" id="InputName" name="district" placeholder="District Name" value="{{ads.district}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">Taluka</label>
+                                <input type="text" class="form-control" id="InputName" name="taluka" placeholder="Taluka Name" value="{{ads.taluka}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputName" class="mb-0">City</label>
+                                <input type="text" class="form-control" id="InputName" name="city" placeholder="City Name" value="{{ads.city}}"> </div>
+                            <div class="form-group col-md-6">
+                                <label for="InputLastname" class="mb-0">Address</label>
+                                <input type="text" class="form-control" id="InputLastname" name="address" placeholder="Address" value="{{ads.address}}"> </div>
+                        </div>
+                        <button type="submit" class="btn hvr-hover">Update Address</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="title-left">
+                        <h3>My Address</h3>
+                    </div>
+                    <a href="{% url 'login' %}" class="btn hvr-hover" style="color:white">Login For Your Address</a>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+    <!-- End login -->
+</body>
+</html>
+{% endblock %}
